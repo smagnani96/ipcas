@@ -12,20 +12,6 @@ https://drive.google.com/file/d/1g6QS__hsjmrfE1f3QuKdnrGEHPpMY9KD/view?usp=shari
 
 ## Requirements
 
-```python
-from mitmproxy import proxy, options
-from mitmproxy.tools.dump import DumpMaster
-from mitmproxy.script import concurrent
-from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
-from random import choice
-from string import digits, ascii_letters
-from threading import Timer
-from re import search
-from urllib3 import PoolManager
-```
-
-Many of these dependencies are already satisfied, but you will likely have to install at least:
-
 * mitmproxy
 * urllib3
 
@@ -42,22 +28,22 @@ The analysis performed on the request is quite simple: if the response payload m
 ## Usage
 
 ```bash
-usage: ipcas.py [-h] [-a ADDRESS] [-p PORT] [-f FLAG] reverse-address
+usage: ipcas.py [-h] [-a ADDRESS] [-p PORT] reverse-address pattern
 
 positional arguments:
   reverse-address       reserve service address ("http[s]://host[:port]")
+  pattern               the pattern to search for in the http body
 
 optional arguments:
   -h, --help            show this help message and exit
   -a ADDRESS, --address ADDRESS
                         address to bind proxy to (default: )
   -p PORT, --port PORT  proxy service port (default: 8080)
-  -f FLAG, --flag FLAG  pattern for the flag (default: myFlg{(.*)})
 ```
 
-It is important to generate the fake flag that the pattent contains the square brackets around the content, since it has to be modified with the randomly created one.
+It is important to generate the fake flag that the pattent contains the square brackets around the content, since it has to be modified with the randomly created one (e.g. "myFlg{(.\*)}").
 
-The default address, as for mitmproxy, is *, meaning that it will listen for all incoming connections also from the other LAN devices.
+The default address, as for mitmproxy, is 0.0.0.0, meaning that it will listen for all incoming connections also from the other LAN devices.
 
 ## Possible extensions
 

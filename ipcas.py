@@ -105,7 +105,7 @@ def main():
 	reverse_address = args['reverse-address']
 	address 		= args['address']
 	port 			= args['port']
-	PATTERN			= args['flag'].encode()
+	PATTERN			= args['pattern'].encode()
 
 	if 'https' in reverse_address: SERVICE_TYPE = 'https'
 
@@ -127,9 +127,9 @@ def main():
 def parseArguments():
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument('reverse-address', help='reserve service address ("http[s]://host[:port]")', type=str)
+    parser.add_argument('pattern', help='the pattern to search for in the http body', type=str)
     parser.add_argument('-a', '--address', help='address to bind proxy to', type=str, default='')
     parser.add_argument('-p', '--port', help='proxy service port', type=int, default=8080)
-    parser.add_argument('-f', '--flag', help='pattern for the flag', type=str, default='myFlg{(.*)}')
     return parser.parse_args().__dict__
 
 
